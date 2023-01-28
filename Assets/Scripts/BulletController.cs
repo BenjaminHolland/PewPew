@@ -20,6 +20,8 @@ public class BulletController : MonoBehaviour
          controller.TakeHit();
          Destroy(gameObject);
         }
+        // Tags don't seem to be the best mechanism for this. You can only have one tag per oject. It's probably better to make some kind of "damageable" component, or at least
+        // a shared component type? Not sure how to structure this.
         if(collision2D.gameObject.CompareTag("crab")){
             var controller = collision2D.gameObject.GetComponent<CrabController>();
             controller.TakeHit();

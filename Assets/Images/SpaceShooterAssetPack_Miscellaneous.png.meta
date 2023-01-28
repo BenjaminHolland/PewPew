@@ -672,15 +672,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpaceShooterAssetPack_Miscellaneous_28
+      name: thrust.base3.1
       rect:
         serializedVersion: 2
-        x: 40
-        y: 40
-        width: 8
-        height: 8
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 43
+        y: 44
+        width: 3
+        height: 4
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -693,15 +693,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpaceShooterAssetPack_Miscellaneous_29
+      name: thrust.base3.2
       rect:
         serializedVersion: 2
-        x: 48
-        y: 40
-        width: 8
-        height: 8
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 51
+        y: 44
+        width: 3
+        height: 4
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -714,15 +714,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpaceShooterAssetPack_Miscellaneous_30
+      name: thrust.base3.3
       rect:
         serializedVersion: 2
-        x: 56
-        y: 40
-        width: 8
-        height: 8
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 59
+        y: 44
+        width: 3
+        height: 4
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -735,15 +735,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpaceShooterAssetPack_Miscellaneous_31
+      name: thrust.base3.4
       rect:
         serializedVersion: 2
-        x: 64
-        y: 40
-        width: 8
-        height: 8
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 67
+        y: 44
+        width: 3
+        height: 4
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1742,6 +1742,7 @@ TextureImporter:
       SpaceShooterAssetPack_Miscellaneous_37: -1014301415
       thrust.base2.1: 1238029245
       SpaceShooterAssetPack_Miscellaneous_78: 2001143666
+      thrust.base3.1: -516723468
       thrust.base2.4: 740924812
       SpaceShooterAssetPack_Miscellaneous_13: -347874035
       SpaceShooterAssetPack_Miscellaneous_27: 1629187789
@@ -1760,10 +1761,8 @@ TextureImporter:
       SpaceShooterAssetPack_Miscellaneous_68: -479578291
       SpaceShooterAssetPack_Miscellaneous_21: -1308829796
       SpaceShooterAssetPack_Miscellaneous_12: 1762094420
-      SpaceShooterAssetPack_Miscellaneous_31: 1450569413
       SpaceShooterAssetPack_Miscellaneous_79: -1135041444
       SpaceShooterAssetPack_Miscellaneous_11: -921693212
-      SpaceShooterAssetPack_Miscellaneous_28: -516723468
       SpaceShooterAssetPack_Miscellaneous_62: 976539575
       SpaceShooterAssetPack_Miscellaneous_42: 1294909183
       SpaceShooterAssetPack_Miscellaneous_46: 1683748525
@@ -1783,12 +1782,13 @@ TextureImporter:
       SpaceShooterAssetPack_Miscellaneous_67: -22415324
       asteroid: -2013919118
       SpaceShooterAssetPack_Miscellaneous_38: -1806743653
-      SpaceShooterAssetPack_Miscellaneous_30: -819066223
+      thrust.base3.4: 1450569413
       SpaceShooterAssetPack_Miscellaneous_48: 1753156202
       SpaceShooterAssetPack_Miscellaneous_56: -758477664
       SpaceShooterAssetPack_Miscellaneous_32: -1491864043
       SpaceShooterAssetPack_Miscellaneous_35: 1814410058
       SpaceShooterAssetPack_Miscellaneous_77: 1022026167
+      thrust.base3.2: 1484836085
       SpaceShooterAssetPack_Miscellaneous_75: -207325714
       SpaceShooterAssetPack_Miscellaneous_50: 916669961
       SpaceShooterAssetPack_Miscellaneous_55: -2087566576
@@ -1797,12 +1797,12 @@ TextureImporter:
       SpaceShooterAssetPack_Miscellaneous_20: 366055546
       SpaceShooterAssetPack_Miscellaneous_9: 760602486
       SpaceShooterAssetPack_Miscellaneous_57: 520118043
-      SpaceShooterAssetPack_Miscellaneous_29: 1484836085
       SpaceShooterAssetPack_Miscellaneous_0: -2074526777
       SpaceShooterAssetPack_Miscellaneous_33: -479742514
       SpaceShooterAssetPack_Miscellaneous_74: -330711532
       SpaceShooterAssetPack_Miscellaneous_10: -1527816576
       SpaceShooterAssetPack_Miscellaneous_72: 1875520527
+      thrust.base3.3: -819066223
       SpaceShooterAssetPack_Miscellaneous_66: 1209329757
       SpaceShooterAssetPack_Miscellaneous_63: 2051869581
       SpaceShooterAssetPack_Miscellaneous_71: -903705719
