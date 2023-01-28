@@ -16,7 +16,7 @@ interface IBoundaryHandlerBuilder
     IBoundaryHandlerBuilder OnOutOfBoundary(Action response);
     IBoundaryHandler Build();
 }
-class RectBoundaryHandler : IBoundaryHandlerBuilder, IBoundaryHandler;
+class RectBoundaryHandler : IBoundaryHandlerBuilder, IBoundaryHandler
 {
     public RectBoundaryHandler(Rect boundary)
     {

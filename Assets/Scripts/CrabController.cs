@@ -7,12 +7,14 @@ public class CrabController : MonoBehaviour
 {
     new private Renderer renderer;
     private int Health = 10;
+    // Woogly is a state where the enemy has lost control of their vehicle. Concretely, they are now a dynamic physics object that can be manipulated by the player.
+    // This could be a core game mechanic if we expand it: Shoot enemies untily they go woogly, then use some guns with physics properties (attraction, repulsion)
+    // to whack enemies into eachother. Maybe add in some "elemental" aspects: "This enemy must be damanged by woogly enemies with some specific type". 
     private bool Woogly = false;
     private Rigidbody2D body;
     new private Collider2D collider;
     private float startTime;
-    // This is actually velocity by I'm lazy;
-    private Vector2 lastPos; 
+    private Vector2 lastVelocity;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,12 +23,15 @@ public class CrabController : MonoBehaviour
         renderer = GetComponent<Renderer>();
         body.isKinematic = true;
         collider.isTrigger = true;
-        
-            body.constraints = RigidbodyConstraints2D.FreezeRotation;
+
+        body.constraints = RigidbodyConstraints2D.FreezeRotation;
         startTime = Time.time;
     }
+    // Can/Should probably be extracted into an interface. Should also probably take an argument depending on the type of hit to support different
+    // responses to different bullets. 
     public void TakeHit()
     {
+        // Mentioned somewhere else, but this should probably be cached.
         var score = GameObject.Find("Score").GetComponent<ScoreController>();
         Health -= 1;
         if (Health < 5)
@@ -35,7 +40,7 @@ public class CrabController : MonoBehaviour
             body.isKinematic = false;
             collider.isTrigger = false;
              body.constraints = RigidbodyConstraints2D.None;
-             body.velocity = lastPos;
+             body.velocity = lastVelocity;
             score.ModifyScoreBy(10);
         }
         if (Health <= 0)
@@ -57,7 +62,7 @@ public class CrabController : MonoBehaviour
             var circle = new Vector2(0.1f * Mathf.Cos(localTime * 4f), 0.1f * Mathf.Sin(localTime * 4f));
             var newPos = downAtSpeed + circle;
             var diff = body.position - newPos;
-            lastPos = diff;
+            lastVelocity = diff;
             body.rotation = (1+Mathf.Atan2(diff.y,diff.x)/Mathf.PI)/2*360f+90;
             body.MovePosition(newPos);
             
@@ -70,6 +75,9 @@ public class CrabController : MonoBehaviour
         var bottomBorderSafe = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, distance)).y + boundarySize.y / 2f;
         var leftBorder = -4 + boundarySize.x / 2f;
         var rightBorder = 4 - boundarySize.x / 2f;
+
+        // What we do when an enemy leaves the screen depends on whether they're woogly or not. If they aren't, we probably want them to either be destroyed
+        // or respawn at the top of the screen. If they are, we probably want them to bounce around pleasingly.
         void onOutOfBounds(Action onWoogly)
         {
             if (!Woogly)
