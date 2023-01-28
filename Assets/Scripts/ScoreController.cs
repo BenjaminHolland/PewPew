@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ScoreController : MonoBehaviour
 {
+    private MainGui mainGui;
     void OnGUI()
     {
         GUI.Label(
@@ -31,6 +32,7 @@ public class ScoreController : MonoBehaviour
             var diff = ActualScore - DisplayScore;
             // This *should* ensure that we always move at least one tick in the right direciton. 
             DisplayScore += (int)Mathf.Sign(diff)+(diff / 10);
+            mainGui.SetScoreGauge((DisplayScore % 5000) / 5000.0f);
            // Not sure if we can just return null here. We also might want to use a timespan for smoother results.
             yield return new WaitForEndOfFrame();
         }
@@ -51,7 +53,8 @@ public class ScoreController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        mainGui = GameObject.Find("Canvas").GetComponent<MainGui>();
+       
     }
 
     // Update is called once per frame
