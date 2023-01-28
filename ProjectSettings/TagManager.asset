@@ -7,6 +7,7 @@ TagManager:
   - asteroid
   - spawner
   - crab
+  - damageable
   layers:
   - Default
   - TransparentFX

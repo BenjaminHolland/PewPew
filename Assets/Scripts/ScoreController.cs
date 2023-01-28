@@ -25,6 +25,7 @@ public class ScoreController : MonoBehaviour
         {
             IsAnimatingScoreChange = true;
         }
+        // this is actually wrong, we shouldn't do anything if we're already animating the score change.
         while (DisplayScore != ActualScore)
         {
             var diff = ActualScore - DisplayScore;

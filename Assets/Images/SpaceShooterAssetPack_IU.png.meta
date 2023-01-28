@@ -113,7 +113,7 @@ TextureImporter:
         width: 8
         height: 8
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -134,7 +134,7 @@ TextureImporter:
         width: 8
         height: 8
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -155,7 +155,7 @@ TextureImporter:
         width: 8
         height: 8
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -176,7 +176,7 @@ TextureImporter:
         width: 8
         height: 8
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -197,7 +197,7 @@ TextureImporter:
         width: 8
         height: 8
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -218,7 +218,7 @@ TextureImporter:
         width: 8
         height: 8
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -226,6 +226,69 @@ TextureImporter:
       bones: []
       spriteID: 9fd8ae0c9739ee64da27d5cc26d6db5a
       internalID: -718739217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gauge.gray.leftcap
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 25
+        width: 2
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd5d28863a664cf4bb8d3a3c048d0de5
+      internalID: 43805205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gauge.gray.rightcap
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 25
+        width: 2
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43a31002ef32dbe4bb0c8c44b23021cc
+      internalID: -2036001602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gauge.gray.segment
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 25
+        width: 1
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ee5cb81ea1f8494e943477ff0b3dac3
+      internalID: 1443453644
       vertices: []
       indices: 
       edges: []
@@ -241,8 +304,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      gauge.gray.leftcap: 43805205
+      gauge.gray.segment: 1443453644
       SpaceShooterAssetPack_IU_2: 87032475
       SpaceShooterAssetPack_IU_1: 1779827119
+      gauge.gray.rightcap: -2036001602
       SpaceShooterAssetPack_IU_3: 1436381644
       SpaceShooterAssetPack_IU_0: 1458959127
       SpaceShooterAssetPack_IU_4: 478745299
