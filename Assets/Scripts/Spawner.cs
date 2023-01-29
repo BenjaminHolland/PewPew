@@ -7,6 +7,7 @@ public class Spawner : MonoBehaviour
     private GameObject shu;
     private GameObject roid;
     private GameObject crab;
+    private GameObject bana;
     public void MakeBigBoom(Vector3 location)
     {
     }
@@ -17,9 +18,10 @@ public class Spawner : MonoBehaviour
         shu = Resources.Load<GameObject>("Shu");
         roid = Resources.Load<GameObject>("Asteroid");
         crab = Resources.Load<GameObject>("Crab");
+        bana = Resources.Load<GameObject>("Banana");
         Instantiate<GameObject>(shu, Vector3.zero, Quaternion.identity);
         SpawnStaticCircle();
-        SpawnCrabLine();
+        SpawnBananaLine();
 
     }
     IEnumerator SpawnCrabLineCoroutine()
@@ -33,6 +35,18 @@ public class Spawner : MonoBehaviour
     void SpawnCrabLine()
     {
         StartCoroutine(SpawnCrabLineCoroutine());
+    }
+    IEnumerator SpawnBananaLineAsync()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            Instantiate<GameObject>(bana, new Vector3(0f, 1f, 0f), Quaternion.identity);
+            yield return new WaitForSeconds(0.5f);
+        }
+    }
+    void SpawnBananaLine()
+    {
+        StartCoroutine(SpawnBananaLineAsync());
     }
     void SpawnStaticCircle()
     {
@@ -53,6 +67,7 @@ public class Spawner : MonoBehaviour
         {
             SpawnStaticCircle();
             SpawnCrabLine();
+            SpawnBananaLine();
         }
 
     }

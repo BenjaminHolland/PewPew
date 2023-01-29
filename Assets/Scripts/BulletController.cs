@@ -27,6 +27,12 @@ public class BulletController : MonoBehaviour
             controller.TakeHit();
             Destroy(gameObject);
         }
+        if (collision2D.gameObject.CompareTag("damageable"))
+        {
+            var controller = collision2D.gameObject.GetComponent<BananaController>();
+            controller.TakeHit();
+            Destroy(gameObject);
+        }
     }
     private void OnTriggerEnter2D(Collider2D collider2D){
       
@@ -35,7 +41,13 @@ public class BulletController : MonoBehaviour
             controller.TakeHit();
             Destroy(gameObject);
         }
-        
+        if (collider2D.gameObject.CompareTag("damageable"))
+        {
+            var controller = collider2D.gameObject.GetComponent<BananaController>();
+            controller.TakeHit();
+            Destroy(gameObject);
+        }
+
     }
 
     void FixedUpdate(){
