@@ -35,13 +35,18 @@ public class BananaController : MonoBehaviour
         // Mentioned somewhere else, but this should probably be cached.
         var score = GameObject.Find("Score").GetComponent<ScoreController>();
         Health -= 1;
-        if (Health < 3)
+        if (Health < 3 && !Woogly)
         {
             Woogly = true;
             body.isKinematic = false;
             collider.isTrigger = false;
-             body.constraints = RigidbodyConstraints2D.None;
-             body.velocity = lastVelocity;
+            body.constraints = RigidbodyConstraints2D.None;
+
+           // Inherit ship's pre-woogly velocity and add random woogly torque
+            body.velocity += -lastVelocity;
+            float woogleTorque = UnityEngine.Random.Range(-10.0f,10.0f);
+            body.AddTorque(woogleTorque);
+
             score.ModifyScoreBy(10);
         }
         if (Health <= 0)
@@ -72,8 +77,7 @@ public class BananaController : MonoBehaviour
             var downAtSpeed = body.position + new Vector2(0, downSpeed*-0.1f);
             //var circle = new Vector2(0.1f * Mathf.Cos(localTime * 4f), 0.1f * Mathf.Sin(localTime * 4f));
             var newPos = downAtSpeed;
-            var diff = body.position - newPos;
-            lastVelocity = diff;
+            lastVelocity = (body.position - newPos)/Time.fixedDeltaTime;
            // body.rotation = (1+Mathf.Atan2(diff.y,diff.x)/Mathf.PI)/2*360f+90;
             body.MovePosition(newPos);
             

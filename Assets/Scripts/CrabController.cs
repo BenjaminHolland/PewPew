@@ -34,7 +34,7 @@ public class CrabController : MonoBehaviour
         // Mentioned somewhere else, but this should probably be cached.
         var score = GameObject.Find("Score").GetComponent<ScoreController>();
         Health -= 1;
-        if (Health < 5) // Is Woogled!
+        if (Health < 5 && !Woogly) // Is Woogled!
         {
             Woogly = true;
             body.isKinematic = false;
