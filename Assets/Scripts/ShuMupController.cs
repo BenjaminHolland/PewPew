@@ -14,6 +14,9 @@ public class ShuMupController : MonoBehaviour
     private Animator animator;
     new private Renderer renderer;
     private float nextBullet = 0f;
+    private PointEffector2D attractor;
+    // We really should keep the charged state somewhere other than the main GUI.
+    private MainGui mainGui;
     private Vector3 HorizontalVelocity
     {
         get { return new Vector3(HorizontalImpulse * HorizontalSpeed, 0f, 0f); }
@@ -27,8 +30,27 @@ public class ShuMupController : MonoBehaviour
     void Start()
     {
         nextBullet = 0;
+        mainGui = GameObject.Find("Canvas").GetComponent<MainGui>();
+        attractor = GameObject.Find("Attractor").GetComponent<PointEffector2D>();
         animator = GetComponent<Animator>();
         renderer = GetComponent<Renderer>();
+    }
+    IEnumerator FireAttractor()
+    {
+        if (!attractor.enabled)
+        {
+            attractor.enabled = true;
+            yield return new WaitForSeconds(5f);
+            attractor.enabled = false;
+        }
+    }
+    public void OnPower(InputValue value)
+    {
+        if (mainGui.IsCharged)
+        {
+            mainGui.SetCharged(false);
+            StartCoroutine(FireAttractor());
+        }
     }
     public void OnFire(InputValue value)
     {

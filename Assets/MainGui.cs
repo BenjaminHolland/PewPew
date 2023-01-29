@@ -17,6 +17,7 @@ public class MainGui : MonoBehaviour
         chargedIcon = GameObject.Find("ChargedIcon").GetComponent<Image>();
         chargedIcon.enabled = false;
     }
+    public bool IsCharged { get { return chargedIcon.enabled; } }
     public void SetCharged(bool charged)
     {
         chargedIcon.enabled = charged;
