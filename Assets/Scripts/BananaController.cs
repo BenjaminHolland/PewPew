@@ -6,7 +6,7 @@ using UnityEngine;
 public class BananaController : MonoBehaviour
 {
     new private Renderer renderer;
-    private int Health = 10;
+    private int Health = 5;
     // Woogly is a state where the enemy has lost control of their vehicle. Concretely, they are now a dynamic physics object that can be manipulated by the player.
     // This could be a core game mechanic if we expand it: Shoot enemies untily they go woogly, then use some guns with physics properties (attraction, repulsion)
     // to whack enemies into eachother. Maybe add in some "elemental" aspects: "This enemy must be damanged by woogly enemies with some specific type". 
@@ -35,7 +35,7 @@ public class BananaController : MonoBehaviour
         // Mentioned somewhere else, but this should probably be cached.
         var score = GameObject.Find("Score").GetComponent<ScoreController>();
         Health -= 1;
-        if (Health < 5)
+        if (Health < 3)
         {
             Woogly = true;
             body.isKinematic = false;
@@ -60,21 +60,21 @@ public class BananaController : MonoBehaviour
         if (!Woogly)
         {
             var localTimeSpec = 0f;
-            if (localTime > 0.5f)
+            if (localTime > 1f)
             {
                 localTimeSpec = 1f;
             }
             else
             {
-                localTimeSpec = localTime * 2f;
+                localTimeSpec = localTime;
             }
             var downSpeed = Acceleration.Evaluate(localTimeSpec);
-            var downAtSpeed = body.position + new Vector2(0, downSpeed*-0.05f);
+            var downAtSpeed = body.position + new Vector2(0, downSpeed*-0.1f);
             //var circle = new Vector2(0.1f * Mathf.Cos(localTime * 4f), 0.1f * Mathf.Sin(localTime * 4f));
             var newPos = downAtSpeed;
             var diff = body.position - newPos;
             lastVelocity = diff;
-            body.rotation = (1+Mathf.Atan2(diff.y,diff.x)/Mathf.PI)/2*360f+90;
+           // body.rotation = (1+Mathf.Atan2(diff.y,diff.x)/Mathf.PI)/2*360f+90;
             body.MovePosition(newPos);
             
         }
