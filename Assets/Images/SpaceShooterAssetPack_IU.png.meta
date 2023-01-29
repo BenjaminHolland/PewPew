@@ -44,7 +44,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 32
@@ -239,7 +239,7 @@ TextureImporter:
         width: 2
         height: 6
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -260,7 +260,7 @@ TextureImporter:
         width: 2
         height: 6
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -281,7 +281,7 @@ TextureImporter:
         width: 1
         height: 6
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -289,6 +289,27 @@ TextureImporter:
       bones: []
       spriteID: 7ee5cb81ea1f8494e943477ff0b3dac3
       internalID: 1443453644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel.gold
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 2, y: 2, z: 2, w: 2}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e32f4b7a26f51445be95cf41aa1cdd2
+      internalID: 1781627436
       vertices: []
       indices: 
       edges: []
@@ -311,6 +332,7 @@ TextureImporter:
       gauge.gray.rightcap: -2036001602
       SpaceShooterAssetPack_IU_3: 1436381644
       SpaceShooterAssetPack_IU_0: 1458959127
+      panel.gold: 1781627436
       SpaceShooterAssetPack_IU_4: 478745299
       SpaceShooterAssetPack_IU_5: -108775064
   spritePackingTag: 

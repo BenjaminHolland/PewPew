@@ -209,6 +209,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: cross
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 140
+        width: 3
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e36993b2739a34240a81a04888bff987
+      internalID: 2045147857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -222,6 +243,7 @@ TextureImporter:
     nameFileIdTable:
       SpaceBlob: -1665389552
       boom.med.3: -1274969797
+      cross: 2045147857
       boom.med.1: 828743554
       boom.med.2: 946171642
       boom.med.4: -1686274932

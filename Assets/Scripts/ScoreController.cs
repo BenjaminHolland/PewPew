@@ -20,19 +20,26 @@ public class ScoreController : MonoBehaviour
     }
     // I wonder if this needs synchronization? Not sure if asynchrony requires protections from concurrency in this situaion.
     bool IsAnimatingScoreChange = false;
+    private int ChargeLevel = 0;
     IEnumerator AnimateScoreChangeAsync()
     {
         if (!IsAnimatingScoreChange)
         {
             IsAnimatingScoreChange = true;
         }
+        if (ChargeLevel > 5000)
+        {
+            ChargeLevel = 0;
+            mainGui.SetCharged(true);
+        }
         // this is actually wrong, we shouldn't do anything if we're already animating the score change.
         while (DisplayScore != ActualScore)
         {
             var diff = ActualScore - DisplayScore;
             // This *should* ensure that we always move at least one tick in the right direciton. 
-            DisplayScore += (int)Mathf.Sign(diff)+(diff / 10);
-            mainGui.SetScoreGauge((DisplayScore % 5000) / 5000.0f);
+            DisplayScore += (int)Mathf.Sign(diff)+(diff / 100);
+            
+            mainGui.SetScoreGauge(ChargeLevel / 5000.0f);
            // Not sure if we can just return null here. We also might want to use a timespan for smoother results.
             yield return new WaitForEndOfFrame();
         }
@@ -42,6 +49,7 @@ public class ScoreController : MonoBehaviour
     public void ModifyScoreBy(int amount)
     {
         ActualScore += amount;
+        ChargeLevel += amount;
         StartCoroutine(AnimateScoreChangeAsync());
     }
     private int DisplayScore = 0;
