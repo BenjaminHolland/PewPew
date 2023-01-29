@@ -15,7 +15,7 @@ public class BananaController : MonoBehaviour
     new private Collider2D collider;
     private float startTime;
     private Vector2 lastVelocity;
-    public AnimationCurve Acceleration; 
+    public AnimationCurve Acceleration;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,9 +42,9 @@ public class BananaController : MonoBehaviour
             collider.isTrigger = false;
             body.constraints = RigidbodyConstraints2D.None;
 
-           // Inherit ship's pre-woogly velocity and add random woogly torque
+            // Inherit ship's pre-woogly velocity and add random woogly torque
             body.velocity += -lastVelocity;
-            float woogleTorque = UnityEngine.Random.Range(-10.0f,10.0f);
+            float woogleTorque = UnityEngine.Random.Range(-10.0f, 10.0f);
             body.AddTorque(woogleTorque);
 
             score.ModifyScoreBy(10);
@@ -61,9 +61,10 @@ public class BananaController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var localTime = Time.time-startTime;
+        var localTime = Time.time - startTime;
         if (!Woogly)
         {
+            // Run through the animation curve for the velocity we want.
             var localTimeSpec = 0f;
             if (localTime > 1f)
             {
@@ -74,13 +75,13 @@ public class BananaController : MonoBehaviour
                 localTimeSpec = localTime;
             }
             var downSpeed = Acceleration.Evaluate(localTimeSpec);
-            var downAtSpeed = body.position + new Vector2(0, downSpeed*-0.1f);
+            var downAtSpeed = body.position + new Vector2(0, downSpeed * -0.1f);
             //var circle = new Vector2(0.1f * Mathf.Cos(localTime * 4f), 0.1f * Mathf.Sin(localTime * 4f));
             var newPos = downAtSpeed;
-            lastVelocity = (body.position - newPos)/Time.fixedDeltaTime;
-           // body.rotation = (1+Mathf.Atan2(diff.y,diff.x)/Mathf.PI)/2*360f+90;
+            lastVelocity = (body.position - newPos) / Time.fixedDeltaTime;
+            // body.rotation = (1+Mathf.Atan2(diff.y,diff.x)/Mathf.PI)/2*360f+90;
             body.MovePosition(newPos);
-            
+
         }
         var boundarySize = renderer.bounds.size;
         var distance = (transform.position - Camera.main.transform.position).z;
@@ -93,7 +94,7 @@ public class BananaController : MonoBehaviour
 
         // What we do when an enemy leaves the screen depends on whether they're woogly or not. If they aren't, we probably want them to either be destroyed
         // or respawn at the top of the screen. If they are, we probably want them to bounce around pleasingly.
-        void onOutOfBounds(Action onWoogly)
+        void resetToTopOr(Action onWoogly)
         {
             if (!Woogly)
             {
@@ -104,42 +105,42 @@ public class BananaController : MonoBehaviour
                 onWoogly();
             }
         }
-        if (transform.position.x < leftBorder)
-        {
-            onOutOfBounds(() =>
+        BoundaryUtils
+            .ForBoundary(Rect.MinMaxRect(leftBorder, bottomBorder, rightBorder, topBorder))
+            .OnBelowXMin(() =>
             {
-                body.velocity = new Vector2(-body.velocity.x, body.velocity.y);
-                body.position = new Vector2(leftBorder, transform.position.y);
-            });
-        }
-        if (transform.position.x > rightBorder)
-        {
-
-
-            onOutOfBounds(() =>
+                resetToTopOr(() =>
+                {
+                    body.velocity = new Vector2(-body.velocity.x, body.velocity.y);
+                    body.position = new Vector2(leftBorder, transform.position.y);
+                });
+            })
+            .OnAboveXMax(() =>
             {
-                body.velocity = new Vector2(-body.velocity.x, body.velocity.y);
-                body.position = new Vector2(rightBorder, transform.position.y);
-            });
-        }
-        if (transform.position.y > topBorder)
-        {
-            onOutOfBounds(() =>
+                resetToTopOr(() =>
+                {
+                    body.velocity = new Vector2(-body.velocity.x, body.velocity.y);
+                    body.position = new Vector2(rightBorder, transform.position.y);
+                });
+            })
+            .OnAboveYMax(() =>
             {
-                body.velocity = new Vector2(body.velocity.x, -body.velocity.y);
-                body.position = new Vector2(transform.position.x, topBorder);
-            });
-        }
-        if (transform.position.y < bottomBorder)
-        {
-
-
-            onOutOfBounds(() =>
+                resetToTopOr(() =>
+                {
+                    body.velocity = new Vector2(body.velocity.x, -body.velocity.y);
+                    body.position = new Vector2(transform.position.x, topBorder);
+                });
+            })
+            .OnBelowYMin(() =>
             {
-                body.velocity = new Vector2(body.velocity.x, -body.velocity.y);
-                body.position = new Vector2(transform.position.x, bottomBorder);
-            });
-        }
+                resetToTopOr(() =>
+                {
+                    body.velocity = new Vector2(body.velocity.x, -body.velocity.y);
+                    body.position = new Vector2(transform.position.x, bottomBorder);
+                });
+            })
+            .Build()
+            .Handle(transform.position);
 
     }
 }

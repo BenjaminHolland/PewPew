@@ -65,28 +65,14 @@ public class BulletController : MonoBehaviour
         var leftBorder = -4 + boundarySize.x / 2f;
         var rightBorder = 4 - boundarySize.x / 2f;
 
-        if (transform.position.x < leftBorder)
-        {
-
-            Destroy(gameObject);
-        }
-        if (transform.position.x > rightBorder)
-        {
-
-
-            Destroy(gameObject);
-        }
-        if (transform.position.y > topBorder)
-        {
-
-
-            Destroy(gameObject);
-        }
-        if (transform.position.y < bottomBorder)
-        {
-
-            Destroy(gameObject);
-        }
+        BoundaryUtils
+            .ForBoundary(new Rect(leftBorder, bottomBorder, rightBorder - leftBorder, topBorder - bottomBorder))
+            .OnOutOfBoundary(() =>
+            {
+                Destroy(gameObject);
+            })
+            .Build()
+            .Handle(transform.position);
 
     }
 }

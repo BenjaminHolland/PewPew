@@ -9,10 +9,10 @@ interface IBoundaryHandler
 }
 interface IBoundaryHandlerBuilder
 {
-    IBoundaryHandlerBuilder OnAboveBoundary(Action response);
-    IBoundaryHandlerBuilder OnBelowBoundary(Action response);
-    IBoundaryHandlerBuilder OnRightOfBoundary(Action response);
-    IBoundaryHandlerBuilder OnLeftOfBoundary(Action response);
+    IBoundaryHandlerBuilder OnAboveYMax(Action response);
+    IBoundaryHandlerBuilder OnBelowYMin(Action response);
+    IBoundaryHandlerBuilder OnAboveXMax(Action response);
+    IBoundaryHandlerBuilder OnBelowXMin(Action response);
     IBoundaryHandlerBuilder OnOutOfBoundary(Action response);
     IBoundaryHandler Build();
 }
@@ -22,10 +22,10 @@ class RectBoundaryHandler : IBoundaryHandlerBuilder, IBoundaryHandler
     {
         this.boundary = boundary;
     }
-    private Action onAboveBoundary = null;
-    private Action onBelowBoundary = null;
-    private Action onLeftOfBoundary = null;
-    private Action onRightOfBoundary = null;
+    private Action onAboveYMax = null;
+    private Action onBelowYMin = null;
+    private Action onBelowXMin = null;
+    private Action onAboveXMax = null;
     private Action onOutOfBondary = null;
     private Rect boundary;
     public IBoundaryHandler Build()
@@ -36,24 +36,24 @@ class RectBoundaryHandler : IBoundaryHandlerBuilder, IBoundaryHandler
     public void Handle(Vector2 position)
     {
         bool isOut = false;
-        if (position.x < boundary.left)
+        if (position.x < boundary.xMin)
         {
-            if(onLeftOfBoundary!=null) { onLeftOfBoundary(); }
+            if(onBelowXMin!=null) { onBelowXMin(); }
             isOut = true;
         }
-        if (position.x > boundary.right)
+        if (position.x > boundary.xMax)
         {
-            if (onRightOfBoundary != null) { onRightOfBoundary(); }
+            if (onAboveXMax != null) { onAboveXMax(); }
             isOut = true;
         }
-        if (position.y < boundary.top)
+        if (position.y > boundary.yMax)
         {
-            if (onAboveBoundary != null) { onAboveBoundary(); }
+            if (onAboveYMax != null) { onAboveYMax(); }
             isOut = true;
         }
-        if (position.y > boundary.bottom)
+        if (position.y < boundary.yMin)
         {
-            if(onBelowBoundary!=null) { onBelowBoundary(); }
+            if(onBelowYMin!=null) { onBelowYMin(); }
             isOut = true;
         }
         if (isOut)
@@ -62,21 +62,21 @@ class RectBoundaryHandler : IBoundaryHandlerBuilder, IBoundaryHandler
         }
     }
 
-    public IBoundaryHandlerBuilder OnAboveBoundary(Action response)
+    public IBoundaryHandlerBuilder OnAboveYMax(Action response)
     {
-        onAboveBoundary = response;
+        onAboveYMax = response;
         return this;
     }
 
-    public IBoundaryHandlerBuilder OnBelowBoundary(Action response)
+    public IBoundaryHandlerBuilder OnBelowYMin(Action response)
     {
-        onBelowBoundary = response;
+        onBelowYMin = response;
         return this;
     }
 
-    public IBoundaryHandlerBuilder OnLeftOfBoundary(Action response)
+    public IBoundaryHandlerBuilder OnBelowXMin(Action response)
     {
-        onLeftOfBoundary = response;
+        onBelowXMin = response;
         return this;
     }
 
@@ -86,9 +86,9 @@ class RectBoundaryHandler : IBoundaryHandlerBuilder, IBoundaryHandler
         return this;
     }
 
-    public IBoundaryHandlerBuilder OnRightOfBoundary(Action response)
+    public IBoundaryHandlerBuilder OnAboveXMax(Action response)
     {
-        onRightOfBoundary = response;
+        onAboveXMax = response;
         return this;
     }
 }
@@ -96,6 +96,10 @@ class RectBoundaryHandler : IBoundaryHandlerBuilder, IBoundaryHandler
 class BoundaryUtils{
     /// <summary>
     /// Provide a utility instance that will allow specifying fluent boundary checks for the given rect. 
+    /// 
+    /// This allows for code to be (arguably) much more readable. However this is at the expensive of speed due to the numer of lambdas involved. 
+    /// Ideally the compiler would allow us to specify that these callbacks be inlined, the calls rewritten with a compiler plugin (apt/ksp like), or some other
+    /// such compile time optimization.
     /// </summary>
     /// <param name="boundary"></param>
     /// <returns></returns>    

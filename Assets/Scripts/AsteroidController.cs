@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AsteroidController : MonoBehaviour
-{ 
+{
     public int Health;
     new private Renderer renderer;
     private Rigidbody2D body;
@@ -18,18 +18,23 @@ public class AsteroidController : MonoBehaviour
         Health = 2;
         animator = GetComponent<Animator>();
     }
-    public void TakeHit(){
+    public void TakeHit()
+    {
         // Can I cache this?
-        var score =  GameObject.Find("Score").GetComponent<ScoreController>();
+        var score = GameObject.Find("Score").GetComponent<ScoreController>();
 
-        Health = Health-1;
-        if(Health<=0){
-            collider.enabled=false;
+        Health = Health - 1;
+        if (Health <= 0)
+        {
+            collider.enabled = false;
             body.velocity = Vector2.zero;
             //TODO better saturate.
-            if(body.angularVelocity>0){
+            if (body.angularVelocity > 0)
+            {
                 body.angularVelocity = 10;
-            }else{
+            }
+            else
+            {
                 body.angularVelocity = -10;
             }
             GameObject.FindGameObjectWithTag("spawner").GetComponent<Spawner>().MakeBigBoom(body.position);
@@ -40,7 +45,7 @@ public class AsteroidController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-          // Resolve boundary clamping
+        // Resolve boundary clamping
         var boundarySize = renderer.bounds.size;
         var distance = (transform.position - Camera.main.transform.position).z;
         var topBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 1, distance)).y - boundarySize.y / 2f;
@@ -48,28 +53,29 @@ public class AsteroidController : MonoBehaviour
         var leftBorder = -4 + boundarySize.x / 2f;
         var rightBorder = 4 - boundarySize.x / 2f;
 
-        if (transform.position.x < leftBorder)
-        {
-            body.velocity = new Vector2(-body.velocity.x,body.velocity.y);
-            body.position = new Vector2(leftBorder,transform.position.y);
-           
-        }
-        if (transform.position.x > rightBorder)
-        {
-
-            body.velocity = new Vector2(-body.velocity.x,body.velocity.y);
-            body.position = new Vector2(rightBorder,transform.position.y);
-        }
-        if (transform.position.y > topBorder)
-        {
-
-            body.velocity = new Vector2(body.velocity.x,-body.velocity.y);
-            body.position = new Vector2(transform.position.x,topBorder);
-        }
-        if (transform.position.y < bottomBorder)
-        {
-            body.velocity = new Vector2(body.velocity.x,-body.velocity.y);
-            body.position = new Vector2(transform.position.x,bottomBorder);
-        }
+        BoundaryUtils
+            .ForBoundary(new Rect(leftBorder, bottomBorder, rightBorder - leftBorder, topBorder - bottomBorder))
+            .OnAboveXMax(() =>
+            {
+                body.velocity = new Vector2(-body.velocity.x, body.velocity.y);
+                body.position = new Vector2(rightBorder, transform.position.y);
+            })
+            .OnBelowXMin(() =>
+            {
+                body.velocity = new Vector2(-body.velocity.x, body.velocity.y);
+                body.position = new Vector2(leftBorder, transform.position.y);
+            })
+            .OnAboveYMax(() =>
+            {
+                body.velocity = new Vector2(body.velocity.x, -body.velocity.y);
+                body.position = new Vector2(transform.position.x, topBorder);
+            })
+            .OnBelowYMin(() =>
+            {
+                body.velocity = new Vector2(body.velocity.x, -body.velocity.y);
+                body.position = new Vector2(transform.position.x, bottomBorder);
+            })
+            .Build()
+            .Handle(transform.position);
     }
 }
