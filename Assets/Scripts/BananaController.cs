@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BananaController : MonoBehaviour
+public class BananaController : MonoBehaviour,IUnit
 {
     new private Renderer renderer;
     private int Health = 5;
@@ -16,6 +16,9 @@ public class BananaController : MonoBehaviour
     private float startTime;
     private Vector2 lastVelocity;
     public AnimationCurve Acceleration;
+
+    int IUnit.Health => Health;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,35 +31,7 @@ public class BananaController : MonoBehaviour
         body.constraints = RigidbodyConstraints2D.FreezeRotation;
         startTime = Time.time;
     }
-    // Can/Should probably be extracted into an interface. Should also probably take an argument depending on the type of hit to support different
-    // responses to different bullets. 
-    public void TakeHit()
-    {
-        // Mentioned somewhere else, but this should probably be cached.
-        var score = GameObject.Find("Score").GetComponent<ScoreController>();
-        Health -= 1;
-        if (Health < 3 && !Woogly)
-        {
-            Woogly = true;
-            body.isKinematic = false;
-            collider.isTrigger = false;
-            body.constraints = RigidbodyConstraints2D.None;
-
-            // Inherit ship's pre-woogly velocity and add random woogly torque
-            body.velocity += -lastVelocity;
-            float woogleTorque = UnityEngine.Random.Range(-10.0f, 10.0f);
-            body.AddTorque(woogleTorque);
-
-            score.ModifyScoreBy(10);
-        }
-        if (Health <= 0)
-        {
-            score.ModifyScoreBy(300);
-            // do animation stuff instead;
-            Destroy(gameObject);
-        }
-
-    }
+  
 
     // Update is called once per frame
     void Update()
@@ -142,5 +117,35 @@ public class BananaController : MonoBehaviour
             .Build()
             .Handle(transform.position);
 
+    }
+
+    public void HitWith(object other)
+    {
+        if (other is DamageEffect damageEffect)
+        {
+            // Mentioned somewhere else, but this should probably be cached.
+            var score = GameObject.Find("Score").GetComponent<ScoreController>();
+            Health -= damageEffect.NormalDamage;
+            if (Health < 3 && !Woogly)
+            {
+                Woogly = true;
+                body.isKinematic = false;
+                collider.isTrigger = false;
+                body.constraints = RigidbodyConstraints2D.None;
+
+                // Inherit ship's pre-woogly velocity and add random woogly torque
+                body.velocity += -lastVelocity;
+                float woogleTorque = UnityEngine.Random.Range(-10.0f, 10.0f);
+                body.AddTorque(woogleTorque);
+
+                score.ModifyScoreBy(10);
+            }
+            if (Health <= 0)
+            {
+                score.ModifyScoreBy(300);
+                // do animation stuff instead;
+                Destroy(gameObject);
+            }
+        }
     }
 }

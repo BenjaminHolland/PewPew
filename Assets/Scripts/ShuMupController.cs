@@ -55,11 +55,11 @@ public class ShuMupController : MonoBehaviour
     public void OnFire(InputValue value)
     {
         firing = value.Get<float>() > 0;
-       
-    } 
+
+    }
     public void OnMove(InputValue action)
     {
-  
+
         var impulse = action.Get<Vector2>();
         HorizontalImpulse = impulse.x;
         VerticalImpulse = impulse.y;
@@ -67,10 +67,10 @@ public class ShuMupController : MonoBehaviour
     }
     // Update is called once per frame
     void Update()
-    { 
-        if (nextBullet <= 0&&firing)
+    {
+        if (nextBullet <= 0 && firing)
         {
-            Instantiate(bullet,transform.position,new Quaternion());
+            Instantiate(bullet, transform.position, new Quaternion());
             nextBullet = 0.1f;
 
         }
@@ -85,30 +85,33 @@ public class ShuMupController : MonoBehaviour
         // Resolve boundary clamping
         var boundarySize = renderer.bounds.size;
         var distance = (transform.position - Camera.main.transform.position).z;
-        var topBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 1, distance)).y-boundarySize.y/2f;
-        var bottomBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, distance)).y+boundarySize.y/2f;
-        var leftBorder = -4+boundarySize.x/2f;
-        var rightBorder = 4-boundarySize.x/2f;
+        var topBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 1, distance)).y - boundarySize.y / 2f;
+        var bottomBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, distance)).y + boundarySize.y / 2f;
+        var leftBorder = -4 + boundarySize.x / 2f;
+        var rightBorder = 4 - boundarySize.x / 2f;
+        BoundaryUtils
+            .ForBoundary(Rect.MinMaxRect(leftBorder, bottomBorder, rightBorder, topBorder))
+            .OnAboveXMax(() =>
+            {
+                transform.position = new Vector3(rightBorder, transform.position.y, transform.position.z);
+            })
+            .OnBelowXMin(() =>
+            {
+                transform.position = new Vector3(leftBorder, transform.position.y, transform.position.z);
+            })
+            .OnAboveYMax(() =>
+            {
+                transform.position = new Vector3(transform.position.x, topBorder, transform.position.z);
+            })
+            .OnBelowYMin(() =>
+            {
+                transform.position = new Vector3(transform.position.x, bottomBorder, transform.position.z);
+            })
+            .Build()
+            .Handle(transform.position);
 
-        if (transform.position.x < leftBorder)
-        {
-            transform.position = new Vector3(leftBorder, transform.position.y, transform.position.z);
-        }
-        if(transform.position.x > rightBorder)
-        {
-            transform.position = new Vector3(rightBorder, transform.position.y, transform.position.z);
-        }
-        if(transform.position.y > topBorder)
-        {
-            transform.position = new Vector3(transform.position.x, topBorder, transform.position.z);
-        }
-        if(transform.position.y < bottomBorder)
-        {
-            transform.position = new Vector3(transform.position.x, bottomBorder, transform.position.z);
-        }
 
 
-       
 
 
     }

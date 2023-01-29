@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 7102257454785291337}
   m_Layer: 0
   m_Name: Banana
-  m_TagString: damageable
+  m_TagString: unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

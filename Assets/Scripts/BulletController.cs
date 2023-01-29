@@ -7,44 +7,35 @@ public class BulletController : MonoBehaviour
     new private Renderer renderer;
     private Rigidbody2D body;
     new private Collider2D collider;
+    private Interactions interactions;
     // Start is called before the first frame update
     void Start()
     {
         renderer = GetComponent<Renderer>();
         body = GetComponent<Rigidbody2D>();
         collider = GetComponent<Collider2D>();
+        interactions = GameObject.Find("Interactions").GetComponent<Interactions>();
     }
     private void OnCollisionEnter2D(Collision2D collision2D){
-        if(collision2D.gameObject.CompareTag("asteroid")){
-         var controller = collision2D.gameObject.GetComponent<AsteroidController>();
-         controller.TakeHit();
-         Destroy(gameObject);
-        }
-        // Tags don't seem to be the best mechanism for this. You can only have one tag per oject. It's probably better to make some kind of "damageable" component, or at least
-        // a shared component type? Not sure how to structure this.
-        if(collision2D.gameObject.CompareTag("crab")){
-            var controller = collision2D.gameObject.GetComponent<CrabController>();
-            controller.TakeHit();
-            Destroy(gameObject);
-        }
-        if (collision2D.gameObject.CompareTag("damageable"))
+        if (collision2D.gameObject.CompareTag("unit"))
         {
-            var controller = collision2D.gameObject.GetComponent<BananaController>();
-            controller.TakeHit();
+
+            var unit = collision2D.gameObject.GetComponent<IUnit>();
+            foreach(var obj in interactions.GetEffects(this.GetType(),unit.GetType())){
+                unit.HitWith(obj);
+            }
             Destroy(gameObject);
         }
     }
     private void OnTriggerEnter2D(Collider2D collider2D){
-      
-        if(collider2D.CompareTag("crab")){
-            var controller = collider2D.gameObject.GetComponent<CrabController>();
-            controller.TakeHit();
-            Destroy(gameObject);
-        }
-        if (collider2D.gameObject.CompareTag("damageable"))
+        if (collider2D.CompareTag("unit"))
         {
-            var controller = collider2D.gameObject.GetComponent<BananaController>();
-            controller.TakeHit();
+            var unit = collider2D.gameObject.GetComponent<IUnit>();
+            foreach (var obj in interactions.GetEffects(this.GetType(), unit.GetType()))
+            {
+                unit.HitWith(obj);
+            }
+   
             Destroy(gameObject);
         }
 

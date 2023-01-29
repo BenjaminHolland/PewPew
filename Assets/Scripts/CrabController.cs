@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CrabController : MonoBehaviour
+public class CrabController : MonoBehaviour,IUnit
 {
     new private Renderer renderer;
     private int Health = 10;
@@ -15,6 +15,9 @@ public class CrabController : MonoBehaviour
     new private Collider2D collider;
     private float startTime;
     private Vector2 lastVelocity;
+
+    int IUnit.Health => Health;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,36 +29,6 @@ public class CrabController : MonoBehaviour
 
         body.constraints = RigidbodyConstraints2D.FreezeRotation;
         startTime = Time.time;
-    }
-    // Can/Should probably be extracted into an interface. Should also probably take an argument depending on the type of hit to support different
-    // responses to different bullets. 
-    public void TakeHit()
-    {
-        // Mentioned somewhere else, but this should probably be cached.
-        var score = GameObject.Find("Score").GetComponent<ScoreController>();
-        Health -= 1;
-        if (Health < 5 && !Woogly) // Is Woogled!
-        {
-            Woogly = true;
-            body.isKinematic = false;
-            body.mass = 5;
-            collider.isTrigger = false;
-            body.constraints = RigidbodyConstraints2D.None;
-
-            // Inherit ship's pre-woogly velocity and add random woogly torque
-            body.velocity += -lastVelocity;
-            float woogleTorque = UnityEngine.Random.Range(-10.0f,10.0f);
-            body.AddTorque(woogleTorque);
-
-            score.ModifyScoreBy(10);
-        }
-        if (Health <= 0) // Is Dead!
-        {
-            score.ModifyScoreBy(300);
-            // do animation stuff instead;
-            Destroy(gameObject);
-        }
-
     }
 
     // Update is called once per frame
@@ -138,5 +111,36 @@ public class CrabController : MonoBehaviour
            .Build()
            .Handle(transform.position);
 
+    }
+
+    public void HitWith(object other)
+    {
+        if (other is DamageEffect damageEffect)
+        {
+            // Mentioned somewhere else, but this should probably be cached.
+            var score = GameObject.Find("Score").GetComponent<ScoreController>();
+            Health -= damageEffect.NormalDamage;
+            if (Health < 5 && !Woogly) // Is Woogled!
+            {
+                Woogly = true;
+                body.isKinematic = false;
+                body.mass = 5;
+                collider.isTrigger = false;
+                body.constraints = RigidbodyConstraints2D.None;
+
+                // Inherit ship's pre-woogly velocity and add random woogly torque
+                body.velocity += -lastVelocity;
+                float woogleTorque = UnityEngine.Random.Range(-10.0f, 10.0f);
+                body.AddTorque(woogleTorque);
+
+                score.ModifyScoreBy(10);
+            }
+            if (Health <= 0) // Is Dead!
+            {
+                score.ModifyScoreBy(300);
+                // do animation stuff instead;
+                Destroy(gameObject);
+            }
+        }
     }
 }

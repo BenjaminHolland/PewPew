@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AsteroidController : MonoBehaviour
+public class AsteroidController : MonoBehaviour,IUnit
 {
     public int Health;
     new private Renderer renderer;
     private Rigidbody2D body;
     new private Collider2D collider;
     private Animator animator;
+
+    int IUnit.Health => Health;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,30 +20,6 @@ public class AsteroidController : MonoBehaviour
         collider = GetComponent<Collider2D>();
         Health = 2;
         animator = GetComponent<Animator>();
-    }
-    public void TakeHit()
-    {
-        // Can I cache this?
-        var score = GameObject.Find("Score").GetComponent<ScoreController>();
-
-        Health = Health - 1;
-        if (Health <= 0)
-        {
-            collider.enabled = false;
-            body.velocity = Vector2.zero;
-            //TODO better saturate.
-            if (body.angularVelocity > 0)
-            {
-                body.angularVelocity = 10;
-            }
-            else
-            {
-                body.angularVelocity = -10;
-            }
-            GameObject.FindGameObjectWithTag("spawner").GetComponent<Spawner>().MakeBigBoom(body.position);
-            animator.SetTrigger("Explode");
-            score.ModifyScoreBy(100);
-        }
     }
     // Update is called once per frame
     void Update()
@@ -77,5 +56,33 @@ public class AsteroidController : MonoBehaviour
             })
             .Build()
             .Handle(transform.position);
+    }
+
+    public void HitWith(object other)
+    {
+        if (other is DamageEffect damageEffect)
+        {
+            // Can I cache this?
+            var score = GameObject.Find("Score").GetComponent<ScoreController>();
+
+            Health -= damageEffect.NormalDamage;
+            if (Health <= 0)
+            {
+                collider.enabled = false;
+                body.velocity = Vector2.zero;
+                //TODO better saturate.
+                if (body.angularVelocity > 0)
+                {
+                    body.angularVelocity = 10;
+                }
+                else
+                {
+                    body.angularVelocity = -10;
+                }
+                GameObject.FindGameObjectWithTag("spawner").GetComponent<Spawner>().MakeBigBoom(body.position);
+                animator.SetTrigger("Explode");
+                score.ModifyScoreBy(100);
+            }
+        }
     }
 }

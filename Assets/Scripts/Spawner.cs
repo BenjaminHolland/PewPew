@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.VFX;
 public class Spawner : MonoBehaviour
@@ -62,8 +63,7 @@ public class Spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var roids = GameObject.FindGameObjectsWithTag("asteroid");
-        if (roids.Length == 0)
+        if (GameObject.FindGameObjectsWithTag("unit").Count(obj => obj.GetComponent<AsteroidController>() != null)==0)
         {
             SpawnStaticCircle();
             SpawnCrabLine();

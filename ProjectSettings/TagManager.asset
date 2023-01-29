@@ -8,6 +8,7 @@ TagManager:
   - spawner
   - crab
   - damageable
+  - unit
   layers:
   - Default
   - TransparentFX
