@@ -125,8 +125,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 4192920829857504901, guid: 0d51ff64ed371064cabdc454d07060a7, type: 3}
-  HorizontalSpeed: 0.005
-  VerticalSpeed: 0.005
+  HorizontalSpeed: 0.01
+  VerticalSpeed: 0.01
 --- !u!114 &4894274019283579069
 MonoBehaviour:
   m_ObjectHideFlags: 0

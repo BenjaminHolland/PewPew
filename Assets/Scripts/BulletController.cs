@@ -47,7 +47,7 @@ public class BulletController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        body.MovePosition(transform.position+new Vector3(0, 0.01f, 0));
+        body.MovePosition(transform.position+new Vector3(0, 0.03f, 0));
         // Resolve boundary clamping
         var boundarySize = renderer.bounds.size;
         var distance = (transform.position - Camera.main.transform.position).z;

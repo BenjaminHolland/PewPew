@@ -30,18 +30,21 @@ public class CrabController : MonoBehaviour,IUnit
         body.constraints = RigidbodyConstraints2D.FreezeRotation;
         startTime = Time.time;
     }
-
+    private Vector3 Direction;
+    private Vector3 Speed;
     // Update is called once per frame
+    
     void Update()
     {
+
         var localTime = Time.time-startTime;
         if (!Woogly)
         {
             // Try to fly in a circle. The "forces" involved here are not quite right. The new position should be computed as the derivitive of a circle scaled by dT,
             // but we are being lazy here, so we're going to normal circle bits without time scaling, using the object-local time as a source instead of dT.
-            var downAtSpeed = body.position + new Vector2(0, -0.007f);
+            var downAtSpeed = body.position + new Vector2(0, -0.003f);
         
-            var circle = new Vector2(0.01f * Mathf.Cos(localTime * 2f), 0.01f * Mathf.Sin(localTime * 2f));
+            var circle = 0.01f*new Vector2(Mathf.Cos(localTime * 2f), Mathf.Sin(localTime * 2f));
             var newPos = downAtSpeed + circle;
             body.MovePosition(newPos);
             
