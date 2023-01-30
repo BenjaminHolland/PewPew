@@ -125,8 +125,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 4192920829857504901, guid: 0d51ff64ed371064cabdc454d07060a7, type: 3}
-  HorizontalSpeed: 0.05
-  VerticalSpeed: 0.05
+  HorizontalSpeed: 0.005
+  VerticalSpeed: 0.005
 --- !u!114 &4894274019283579069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,7 +188,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.4
+  m_Radius: 0.04
 --- !u!50 &7609353351615320821
 Rigidbody2D:
   serializedVersion: 4
@@ -258,7 +258,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1.8
+  m_Radius: 0.18
 --- !u!250 &5945340331202495746
 PointEffector2D:
   m_ObjectHideFlags: 0
@@ -305,7 +305,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8179646899661160548}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.094, z: 0}
+  m_LocalPosition: {x: 0, y: -0.03, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -432,7 +432,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 0.2
 --- !u!250 &2275722001813425461
 PointEffector2D:
   m_ObjectHideFlags: 0

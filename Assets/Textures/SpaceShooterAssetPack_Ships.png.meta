@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -193,9 +193,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 40
-        y: 72
-        width: 8
-        height: 8
+        y: 73
+        width: 7
+        height: 5
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -276,10 +276,10 @@ TextureImporter:
       name: crab
       rect:
         serializedVersion: 2
-        x: 72
-        y: 72
-        width: 8
-        height: 8
+        x: 73
+        y: 73
+        width: 7
+        height: 5
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1690,7 +1690,6 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      SpaceShooterAssetPack_Ships_51: 1750378
       SpaceShooterAssetPack_Ships_54: 772032848
       SpaceShooterAssetPack_Ships_66: -1091340030
       SpaceShooterAssetPack_Ships_71: 752145742
@@ -1708,6 +1707,7 @@ TextureImporter:
       crab: 403089868
       SpaceShooterAssetPack_Ships_40: -1809034898
       shu.left: -1785010144
+      SpaceShooterAssetPack_Ships_47: -1320212234
       SpaceShooterAssetPack_Ships_41: 509905634
       SpaceShooterAssetPack_Ships_33: -241441247
       shu.right: 1116526790
@@ -1758,13 +1758,13 @@ TextureImporter:
       SpaceShooterAssetPack_Ships_38: -1796438277
       SpaceShooterAssetPack_Ships_63: 1162974771
       SpaceShooterAssetPack_Ships_65: -581467405
-      SpaceShooterAssetPack_Ships_7: -878456155
-      SpaceShooterAssetPack_Ships_5: 891653892
-      SpaceShooterAssetPack_Ships_56: 1007072192
-      SpaceShooterAssetPack_Ships_47: -1320212234
-      SpaceShooterAssetPack_Ships_53: 342712116
-      SpaceShooterAssetPack_Ships_42: -1646097599
       shu.neutral: -1725858185
+      SpaceShooterAssetPack_Ships_7: -878456155
+      SpaceShooterAssetPack_Ships_51: 1750378
+      SpaceShooterAssetPack_Ships_56: 1007072192
+      SpaceShooterAssetPack_Ships_5: 891653892
+      SpaceShooterAssetPack_Ships_42: -1646097599
+      SpaceShooterAssetPack_Ships_53: 342712116
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

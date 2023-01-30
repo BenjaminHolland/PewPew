@@ -39,8 +39,9 @@ public class CrabController : MonoBehaviour,IUnit
         {
             // Try to fly in a circle. The "forces" involved here are not quite right. The new position should be computed as the derivitive of a circle scaled by dT,
             // but we are being lazy here, so we're going to normal circle bits without time scaling, using the object-local time as a source instead of dT.
-            var downAtSpeed = body.position + new Vector2(0, -0.02f);
-            var circle = new Vector2(0.1f * Mathf.Cos(localTime * 4f), 0.1f * Mathf.Sin(localTime * 4f));
+            var downAtSpeed = body.position + new Vector2(0, -0.007f);
+        
+            var circle = new Vector2(0.01f * Mathf.Cos(localTime * 2f), 0.01f * Mathf.Sin(localTime * 2f));
             var newPos = downAtSpeed + circle;
             body.MovePosition(newPos);
             
@@ -58,8 +59,8 @@ public class CrabController : MonoBehaviour,IUnit
         var bottomBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, -0.1f, distance)).y + boundarySize.y / 2f;
         var topBorderSafe = Camera.main.ViewportToWorldPoint(new Vector3(0, 1, distance)).y - boundarySize.y / 2f;
         var bottomBorderSafe = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, distance)).y + boundarySize.y / 2f;
-        var leftBorder = -4 + boundarySize.x / 2f;
-        var rightBorder = 4 - boundarySize.x / 2f;
+        var leftBorder = -1 + boundarySize.x / 2f;
+        var rightBorder = 1 - boundarySize.x / 2f;
 
         // What we do when an enemy leaves the screen depends on whether they're woogly or not. If they aren't, we probably want them to either be destroyed
         // or respawn at the top of the screen. If they are, we probably want them to bounce around pleasingly.

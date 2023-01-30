@@ -4,24 +4,30 @@ using UnityEngine;
 
 public class BackgroundController : MonoBehaviour
 {
-    public float BackgroundSpeed = 0.1f;
+    private bool triggeredSpawn = false;
+    private Spawner spawner;
+    public float BackgroundSpeed = 0.005f;
     // Start is called before the first frame update
     void Start()
     {
+        spawner = GameObject.Find("Spawner").GetComponent<Spawner>();
     }
-
+    
     // Update is called once per frame
     void Update()
     {  
 
         transform.position += new Vector3(0, -BackgroundSpeed, 0f);
         var distance = (transform.position - Camera.main.transform.position).z;
-        var topBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 1, distance)).y;
         var bottomBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, distance)).y;
         var backgroundSize = GetComponent<Renderer>().bounds.size;
-        if (transform.position.y + (backgroundSize.y / 2f) < bottomBorder)
+        if(transform.position.y-backgroundSize.y<bottomBorder&&!triggeredSpawn){
+            triggeredSpawn = true;
+            spawner.SpawnBackgroundPatch();
+        }
+        if (transform.position.y < bottomBorder)
         {
-            transform.position = new Vector3(transform.position.x, 16f, transform.position.z);
+            Destroy(gameObject);
         }
 
     }

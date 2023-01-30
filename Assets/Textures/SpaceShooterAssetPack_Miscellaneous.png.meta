@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -192,10 +192,10 @@ TextureImporter:
       name: thrust.base1.1
       rect:
         serializedVersion: 2
-        x: 40
-        y: 56
-        width: 8
-        height: 8
+        x: 44
+        y: 61
+        width: 1
+        height: 3
       alignment: 2
       pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -213,10 +213,10 @@ TextureImporter:
       name: thrust.base1.2
       rect:
         serializedVersion: 2
-        x: 48
-        y: 56
-        width: 8
-        height: 8
+        x: 52
+        y: 62
+        width: 1
+        height: 2
       alignment: 2
       pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -234,10 +234,10 @@ TextureImporter:
       name: thrust.base1.3
       rect:
         serializedVersion: 2
-        x: 56
-        y: 56
-        width: 8
-        height: 8
+        x: 60
+        y: 61
+        width: 1
+        height: 3
       alignment: 2
       pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -255,10 +255,10 @@ TextureImporter:
       name: thrust.base1.4
       rect:
         serializedVersion: 2
-        x: 64
-        y: 56
-        width: 8
-        height: 8
+        x: 68
+        y: 61
+        width: 1
+        height: 3
       alignment: 2
       pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -444,10 +444,10 @@ TextureImporter:
       name: thrust.base2.1
       rect:
         serializedVersion: 2
-        x: 40
-        y: 48
-        width: 8
-        height: 8
+        x: 43
+        y: 52
+        width: 2
+        height: 4
       alignment: 2
       pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -465,10 +465,10 @@ TextureImporter:
       name: thrust.base2.2
       rect:
         serializedVersion: 2
-        x: 48
-        y: 48
-        width: 8
-        height: 8
+        x: 51
+        y: 52
+        width: 2
+        height: 4
       alignment: 2
       pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -486,10 +486,10 @@ TextureImporter:
       name: thrust.base2.3
       rect:
         serializedVersion: 2
-        x: 56
-        y: 48
-        width: 8
-        height: 8
+        x: 59
+        y: 53
+        width: 2
+        height: 3
       alignment: 2
       pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -507,10 +507,10 @@ TextureImporter:
       name: thrust.base2.4
       rect:
         serializedVersion: 2
-        x: 64
-        y: 48
-        width: 8
-        height: 8
+        x: 67
+        y: 53
+        width: 2
+        height: 3
       alignment: 2
       pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -651,13 +651,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: asteroid
+      name: asteroid.large
       rect:
         serializedVersion: 2
-        x: 16
-        y: 32
-        width: 16
-        height: 16
+        x: 17
+        y: 33
+        width: 13
+        height: 14
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -861,7 +861,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpaceShooterAssetPack_Miscellaneous_37
+      name: asteroid.small
       rect:
         serializedVersion: 2
         x: 8
@@ -1735,17 +1735,18 @@ TextureImporter:
       thrust.base2.3: -587959246
       SpaceShooterAssetPack_Miscellaneous_15: -1338698318
       SpaceShooterAssetPack_Miscellaneous_73: -1133939754
+      asteroid.small: -1014301415
       SpaceShooterAssetPack_Miscellaneous_69: 1811524598
       SpaceShooterAssetPack_Miscellaneous_47: -832126350
       SpaceShooterAssetPack_Miscellaneous_22: -111773738
       SpaceShooterAssetPack_Miscellaneous_70: 1305638529
-      SpaceShooterAssetPack_Miscellaneous_37: -1014301415
       thrust.base2.1: 1238029245
       SpaceShooterAssetPack_Miscellaneous_78: 2001143666
       thrust.base3.1: -516723468
       thrust.base2.4: 740924812
       SpaceShooterAssetPack_Miscellaneous_13: -347874035
       SpaceShooterAssetPack_Miscellaneous_27: 1629187789
+      asteroid.large: -2013919118
       SpaceShooterAssetPack_Miscellaneous_59: -593915967
       SpaceShooterAssetPack_Miscellaneous_23: -179812239
       SpaceShooterAssetPack_Miscellaneous_24: -988377747
@@ -1780,7 +1781,6 @@ TextureImporter:
       SpaceShooterAssetPack_Miscellaneous_51: 2029464854
       SpaceShooterAssetPack_Miscellaneous_52: 891791390
       SpaceShooterAssetPack_Miscellaneous_67: -22415324
-      asteroid: -2013919118
       SpaceShooterAssetPack_Miscellaneous_38: -1806743653
       thrust.base3.4: 1450569413
       SpaceShooterAssetPack_Miscellaneous_48: 1753156202

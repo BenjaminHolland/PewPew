@@ -50,7 +50,7 @@ public class BananaController : MonoBehaviour,IUnit
                 localTimeSpec = localTime;
             }
             var downSpeed = Acceleration.Evaluate(localTimeSpec);
-            var downAtSpeed = body.position + new Vector2(0, downSpeed * -0.1f);
+            var downAtSpeed = body.position + new Vector2(0, downSpeed * -0.01f);
             //var circle = new Vector2(0.1f * Mathf.Cos(localTime * 4f), 0.1f * Mathf.Sin(localTime * 4f));
             var newPos = downAtSpeed;
             lastVelocity = (body.position - newPos) / Time.fixedDeltaTime;
@@ -64,8 +64,8 @@ public class BananaController : MonoBehaviour,IUnit
         var bottomBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, -0.1f, distance)).y + boundarySize.y / 2f;
         var topBorderSafe = Camera.main.ViewportToWorldPoint(new Vector3(0, 1, distance)).y - boundarySize.y / 2f;
         var bottomBorderSafe = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, distance)).y + boundarySize.y / 2f;
-        var leftBorder = -4 + boundarySize.x / 2f;
-        var rightBorder = 4 - boundarySize.x / 2f;
+        var leftBorder = -1 + boundarySize.x / 2f;
+        var rightBorder = 1 - boundarySize.x / 2f;
 
         // What we do when an enemy leaves the screen depends on whether they're woogly or not. If they aren't, we probably want them to either be destroyed
         // or respawn at the top of the screen. If they are, we probably want them to bounce around pleasingly.

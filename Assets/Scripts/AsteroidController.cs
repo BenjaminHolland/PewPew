@@ -29,8 +29,8 @@ public class AsteroidController : MonoBehaviour,IUnit
         var distance = (transform.position - Camera.main.transform.position).z;
         var topBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 1, distance)).y - boundarySize.y / 2f;
         var bottomBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, distance)).y + boundarySize.y / 2f;
-        var leftBorder = -4 + boundarySize.x / 2f;
-        var rightBorder = 4 - boundarySize.x / 2f;
+        var leftBorder = -1 + boundarySize.x / 2f;
+        var rightBorder = 1 - boundarySize.x / 2f;
 
         BoundaryUtils
             .ForBoundary(new Rect(leftBorder, bottomBorder, rightBorder - leftBorder, topBorder - bottomBorder))
