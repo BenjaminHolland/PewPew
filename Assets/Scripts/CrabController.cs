@@ -16,7 +16,9 @@ public class CrabController : MonoBehaviour,IUnit
     private float startTime;
     private Vector2 lastVelocity;
 
+    // Interface Accessors
     int IUnit.Health => Health;
+    bool IUnit.Woogly => Woogly;
 
     // Start is called before the first frame update
     void Start()

@@ -8,6 +8,7 @@ public interface IUnit
 {
     public int Health { get; }
     public void HitWith(object other);
+    public bool Woogly {get;}
 }
 
 /// <summary>
