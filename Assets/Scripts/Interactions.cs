@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-class Interactions:MonoBehaviour
+public class Interactions:MonoBehaviour
 {
     private Dictionary<Tuple<Type, Type>, List<object>> interactions = new Dictionary<Tuple<Type, Type>, List<object>>();
     public void AddEffect<T,U>(object effect)
@@ -38,6 +38,8 @@ class Interactions:MonoBehaviour
         AddEffect<BulletController, AsteroidController>(new DamageEffect(NormalDamage: 1));
         AddEffect<BulletController, CrabController>(new DamageEffect(NormalDamage: 1));
         AddEffect<BulletController, BananaController>(new DamageEffect(NormalDamage: 1));
+        AddEffect<BananaController, CrabController>(new DamageEffect(NormalDamage: 1));
+        AddEffect<BananaController, BananaController>(new DamageEffect(NormalDamage: 1));
 
     }
 }

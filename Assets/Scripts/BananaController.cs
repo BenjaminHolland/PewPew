@@ -16,8 +16,8 @@ public class BananaController : MonoBehaviour,IUnit
     private float startTime;
     private Vector2 lastVelocity;
     public AnimationCurve Acceleration;
-
     int IUnit.Health => Health;
+    bool IUnit.Woogly => Woogly;
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +31,6 @@ public class BananaController : MonoBehaviour,IUnit
         body.constraints = RigidbodyConstraints2D.FreezeRotation;
         startTime = Time.time;
     }
-  
 
     // Update is called once per frame
     void Update()
@@ -148,4 +147,13 @@ public class BananaController : MonoBehaviour,IUnit
             }
         }
     }
+
+    void OnTriggerEnter2D(Collider2D collider){
+        CollisionEvent.ProcessUnitKinematicCollision(this.gameObject,collider);
+    }
+
+    void OnCollisionEnter2D(Collision2D collision){
+        CollisionEvent.ProcessUnitDynamicCollision(this.gameObject,collision);
+    }
+
 }

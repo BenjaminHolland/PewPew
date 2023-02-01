@@ -11,6 +11,7 @@ public class AsteroidController : MonoBehaviour,IUnit
     private Animator animator;
 
     int IUnit.Health => Health;
+    bool IUnit.Woogly => false;
 
     // Start is called before the first frame update
     void Start()
