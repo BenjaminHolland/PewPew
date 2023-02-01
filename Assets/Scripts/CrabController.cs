@@ -145,4 +145,12 @@ public class CrabController : MonoBehaviour,IUnit
             }
         }
     }
+
+    void OnTriggerEnter2D(Collider2D collider){
+        CollisionEvent.ProcessUnitKinematicCollision(this.gameObject,collider);
+    }
+
+    void OnCollisionEnter2D(Collision2D collision){
+        CollisionEvent.ProcessUnitDynamicCollision(this.gameObject,collision);
+    }
 }

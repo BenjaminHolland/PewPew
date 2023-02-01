@@ -16,9 +16,6 @@ public class BananaController : MonoBehaviour,IUnit
     private float startTime;
     private Vector2 lastVelocity;
     public AnimationCurve Acceleration;
-
-    private Interactions interactions;
-
     int IUnit.Health => Health;
     bool IUnit.Woogly => Woogly;
 
@@ -33,8 +30,6 @@ public class BananaController : MonoBehaviour,IUnit
 
         body.constraints = RigidbodyConstraints2D.FreezeRotation;
         startTime = Time.time;
-
-        interactions = GameObject.Find("Interactions").GetComponent<Interactions>();
     }
 
     // Update is called once per frame
@@ -154,29 +149,11 @@ public class BananaController : MonoBehaviour,IUnit
     }
 
     void OnTriggerEnter2D(Collider2D collider){
-
-        var unit = collider.gameObject.GetComponent<IUnit>();
-        if (collider.CompareTag("unit"))
-        {
-            if(!this.Woogly && !unit.Woogly){
-                Debug.Log("Both not woogly!");
-                return;
-            }
-
-            if(!this.Woogly && unit.Woogly){
-                Debug.Log("Only collidEE woogly");
-                return;
-            }
-
-            if(this.Woogly && !unit.Woogly){
-                Debug.Log("Only collidER is woogly!");
-                return;
-            }
-
-            if(this.Woogly && unit.Woogly){
-                Debug.Log("Both are woogly!");
-                return;
-            }
-        }
+        CollisionEvent.ProcessUnitKinematicCollision(this.gameObject,collider);
     }
+
+    void OnCollisionEnter2D(Collision2D collision){
+        CollisionEvent.ProcessUnitDynamicCollision(this.gameObject,collision);
+    }
+
 }
